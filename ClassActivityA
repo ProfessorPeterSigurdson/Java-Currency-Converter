@@ -1,18 +1,25 @@
 class Converter{
+    // class variable: conversion rate
+    // CDN to USD
+    static double Cnd_To_USD = 0.760185; 
 
-    public double convertCurrency(String starterCurrency, 
+    public static double convertCurrency(String starterCurrency, 
     String targetCurrency, 
     double starterAmount){
-        return 0;
-
+        // how to code the algorithm to make this work?
+        // make simplest case: Cdn to USD
+        return starterAmount * Cnd_To_USD;
     }
 
 }
+
 public class CurrencyConverter {
     public static void main(String[] args) {
         Customer customer = new Customer();
+        double convertedAmount = customer.getAmountConverted(100);
 
-    
+        System.out.println(convertedAmount);
+        
     }
 }   
 
@@ -24,9 +31,10 @@ class Customer{
     public String convertToCurrency;
     public double amountConverted;
 
-    public double getAmountConverted() {
-        return 0;
+    public double getAmountConverted(double starterAmount) {
+        return Converter.convertCurrency("CND", 
+        "USD", 
+        starterAmount);
     }
 
 }
-
