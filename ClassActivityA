@@ -1,0 +1,32 @@
+class Converter{
+
+    public double convertCurrency(String starterCurrency, 
+    String targetCurrency, 
+    double starterAmount){
+        return 0;
+
+    }
+
+}
+public class CurrencyConverter {
+    public static void main(String[] args) {
+        Customer customer = new Customer();
+
+    
+    }
+}   
+
+class Customer{
+
+    public String name;
+    public double amountToConvert;
+    public String currencyToConvert;
+    public String convertToCurrency;
+    public double amountConverted;
+
+    public double getAmountConverted() {
+        return 0;
+    }
+
+}
+
