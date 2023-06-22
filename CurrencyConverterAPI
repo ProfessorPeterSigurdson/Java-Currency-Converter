@@ -1,0 +1,64 @@
+write a complete java program to take a provided input amount, a source currency and a convert to target currency, and the program converts currency using a free api service
+
+
+Here is a complete Java program that takes a provided input amount, a source currency, and a target currency, 
+and converts currency using a free API service:
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import org.json.JSONObject;
+
+public class CurrencyConverter {
+    public static void main(String[] args) {
+        try {
+            // Get user input
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Enter the amount to convert:");
+            double amount = Double.parseDouble(reader.readLine());
+            System.out.println("Enter the source currency (3-letter code):");
+            String sourceCurrency = reader.readLine().toUpperCase();
+            System.out.println("Enter the target currency (3-letter code):");
+            String targetCurrency = reader.readLine().toUpperCase();
+
+            // Call the API
+            String url = "https://api.currencylayer.com/convert?access_key=YOUR_ACCESS_KEY&from=" + sourceCurrency + "&to=" + targetCurrency + "&amount=" + amount;
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            // Parse the JSON response
+            JSONObject json = new JSONObject(response.toString());
+            double result = json.getDouble("result");
+
+            // Print the result
+            System.out.println(amount + " " + sourceCurrency + " = " + result + " " + targetCurrency);
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+}
+
+This program uses the CurrencyLayer API to convert currency. 
+To use this program, you will need to sign up for a free API key on the CurrencyLayer website
+1
+. Replace "YOUR_ACCESS_KEY" in the URL with your API key.
+When you run the program, it will prompt you to enter the amount to convert, the source currency (using the 3-letter code), and 
+the target currency (also using the 3-letter code). It will then call the API and parse the JSON response to get the converted amount. 
+Finally, it will print the result to the console.
+Note that this program assumes that the source currency is always USD, as this is the case with the free version of the 
+CurrencyLayer API
+1
+. If you want to convert from a different source currency, you will need to modify the API call accordingly.
+Also, keep in mind that exchanging currency often comes with added fees that a conversion calculator won’t be able to predict
+2
+. For instance, credit card companies usually charge a 2.5% conversion fee on all foreign transactions, and ABM networks, which are called ATMs in the United States, may charge an additional flat fee. Individual merchants may also charge supplemental fees if you ask them to convert the price of an item to your home currency at checkout.
